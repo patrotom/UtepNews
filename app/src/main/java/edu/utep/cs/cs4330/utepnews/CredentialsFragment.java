@@ -61,9 +61,17 @@ public class CredentialsFragment extends Fragment {
                 submitButton.setText(getString(R.string.login));
                 actionTextView.setText(getString(R.string.register));
                 submitButton.setOnClickListener(this::loginClicked);
+                actionTextView.setOnClickListener((View view) -> {
+                    Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                    startActivity(intent);
+                });
                 break;
             case REGISTER_LAYOUT:
                 submitButton.setOnClickListener(this::registerClicked);
+                actionTextView.setOnClickListener((View view) -> {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                });
                 break;
             default:
                 break;
