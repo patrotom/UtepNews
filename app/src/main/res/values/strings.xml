@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">UTEP News</string>
+    <string name="register">REGISTER</string>
+    <string name="login">LOGIN</string>
+    <string name="about">ABOUT</string>
+    <string name="contact">CONTACT</string>
+    <string name="sep">|</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="password_again_hint">Password again</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
