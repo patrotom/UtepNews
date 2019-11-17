@@ -106,7 +106,36 @@ public class CredentialsFragment extends Fragment {
                 });
     }
 
-    private void loginClicked(View view) {}
+    private void loginClicked(View view) {
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        if (!isValidEmail(email)) {
+            Toast.makeText(view.getContext(), "Invalid email!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(view.getContext(), "Password can not be empty!",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener((@NonNull Task<AuthResult> task) -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(view.getContext(), "Login successful!",
+                                Toast.LENGTH_LONG).show();
+
+                        /* TODO */
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(view.getContext(), "Login failed!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
 
     private boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
