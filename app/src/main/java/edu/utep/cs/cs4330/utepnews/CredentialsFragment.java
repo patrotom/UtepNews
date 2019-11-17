@@ -14,11 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,32 +29,29 @@ public class CredentialsFragment extends Fragment {
     private EditText passwordEditText;
     private EditText passwordAgainEditText;
     private Button submitButton;
-    private ProgressBar progressBar;
     private TextView aboutTextView;
     private TextView contactTextView;
     private TextView actionTextView;
 
     private FirebaseAuth auth;
 
-    public CredentialsFragment() {}
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = getView();
+
+        View view = inflater.inflate(R.layout.fragment_credentials, container, false);
 
         emailEditText = view.findViewById(R.id.emailEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
         passwordAgainEditText = view.findViewById(R.id.passwordAgainEditText);
         submitButton = view.findViewById(R.id.submitButton);
-        progressBar = view.findViewById(R.id.progressBar);
         aboutTextView = view.findViewById(R.id.aboutTextView);
         contactTextView = view.findViewById(R.id.contactTextView);
         actionTextView = view.findViewById(R.id.actionTextView);
 
         auth = FirebaseAuth.getInstance();
 
-        return inflater.inflate(R.layout.fragment_credentials, container, false);
+        return view;
     }
 
     public void adjustLayout(int type) {
@@ -76,7 +71,6 @@ public class CredentialsFragment extends Fragment {
     }
 
     private void registerClicked(View view) {
-        progressBar.setVisibility(View.VISIBLE);
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String passwordAgain = passwordAgainEditText.getText().toString();
@@ -101,7 +95,6 @@ public class CredentialsFragment extends Fragment {
                     if (task.isSuccessful()) {
                         Toast.makeText(view.getContext(), "Registration successful!",
                                 Toast.LENGTH_LONG).show();
-                        progressBar.setVisibility(View.GONE);
 
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
@@ -109,7 +102,6 @@ public class CredentialsFragment extends Fragment {
                     else {
                         Toast.makeText(view.getContext(), "Registration failed!",
                                 Toast.LENGTH_LONG).show();
-                        progressBar.setVisibility(View.GONE);
                     }
                 });
     }
