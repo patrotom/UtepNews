@@ -10,5 +10,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        CredentialsFragment credentialsFragment = (CredentialsFragment)
+                getSupportFragmentManager().findFragmentById(R.id.detailFragment);
+        credentialsFragment.adjustLayout(0);
     }
 }
