@@ -2,6 +2,8 @@ package edu.utep.cs.cs4330.utepnews;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,11 +22,22 @@ public class HomePageActivity extends AppCompatActivity {
     private DatabaseReference db;
     private List<Post> posts;
 
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter recyclerAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         setupDatabase();
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerAdapter = new PostAdapter(posts);
+        recyclerView.setAdapter(recyclerAdapter);
     }
 
     private void setupDatabase() {
@@ -39,7 +52,7 @@ public class HomePageActivity extends AppCompatActivity {
                         Post post = snapshot.getValue(Post.class);
                         posts.add(post);
                     }
-//                    adapter.notifyDataSetChanged();
+                    recyclerAdapter.notifyDataSetChanged();
                 }
             }
 
