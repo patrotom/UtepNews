@@ -16,6 +16,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -31,13 +33,7 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         setupDatabase();
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerAdapter = new PostAdapter(posts);
-        recyclerView.setAdapter(recyclerAdapter);
+        setupRecyclerView();
     }
 
     private void setupDatabase() {
@@ -48,9 +44,18 @@ public class HomePageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 posts.clear();
                 if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Post post = snapshot.getValue(Post.class);
-                        posts.add(post);
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        if (ds.child("added").exists() &&
+                                ds.child("author").exists() &&
+                                ds.child("description").exists() &&
+                                ds.child("file_hash").exists() &&
+                                ds.child("heading").exists()) {
+                            Post post = ds.getValue(Post.class);
+                            posts.add(post);
+
+                            Collections.sort(posts);
+                            Collections.reverse(posts);
+                        }
                     }
                     recyclerAdapter.notifyDataSetChanged();
                 }
@@ -59,5 +64,14 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+    }
+
+    private void setupRecyclerView() {
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerAdapter = new PostAdapter(posts);
+        recyclerView.setAdapter(recyclerAdapter);
     }
 }
