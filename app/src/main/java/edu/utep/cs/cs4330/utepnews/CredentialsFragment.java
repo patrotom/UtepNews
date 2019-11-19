@@ -134,8 +134,7 @@ public class CredentialsFragment extends Fragment {
                         Toast.makeText(view.getContext(), "Login successful!",
                                 Toast.LENGTH_LONG).show();
 
-                        /* TODO */
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        Intent intent = new Intent(getActivity(), HomePageActivity.class);
                         startActivity(intent);
                     }
                     else {
