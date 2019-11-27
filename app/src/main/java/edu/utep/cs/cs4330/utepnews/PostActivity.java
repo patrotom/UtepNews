@@ -32,8 +32,8 @@ public class PostActivity extends AppCompatActivity {
 
         pathReference.getDownloadUrl().addOnSuccessListener((Uri uri) ->
                 webView.loadUrl(uri.toString())).addOnFailureListener(
-                        (@NonNull Exception exception) -> Toast.makeText(this,
-                    "Unable to load content! Please, check your internet connection!",
-                    Toast.LENGTH_LONG).show());
+                        (@NonNull Exception exception) ->
+                                Toast.makeText(this, "Unable to load content!",
+                                        Toast.LENGTH_LONG).show());
     }
 }
