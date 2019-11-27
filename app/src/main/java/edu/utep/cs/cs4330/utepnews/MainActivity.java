@@ -4,6 +4,7 @@ package edu.utep.cs.cs4330.utepnews;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,17 +15,14 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class MainActivity extends AppCompatActivity {
-    private Button registerButton;
-    private Button loginButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        registerButton = findViewById(R.id.registerButton);
-        loginButton = findViewById(R.id.loginButton);
+        Button registerButton = findViewById(R.id.registerButton);
+        Button loginButton = findViewById(R.id.loginButton);
 
         registerButton.setOnClickListener((View view) -> {
             Intent intent = new Intent(this, RegisterActivity.class);
@@ -36,25 +34,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        checkAsyncConn();
-    }
+        startService(new Intent(this, ConnectionCheckService.class));
 
-    private void checkAsyncConn() {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {}
-
-            @Override
-            protected Void doInBackground(Void... unused) {
-                while (true) {
-                    if (!Utilities.isInternetAvailable())
-                        break;
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void unused) {}
-        }.execute();
     }
 }
