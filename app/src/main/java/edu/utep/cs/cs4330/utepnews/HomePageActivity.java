@@ -42,6 +42,8 @@ public class HomePageActivity extends AppCompatActivity {
                 Intent i = new Intent(this, PostActivity.class);
 
                 i.putExtra("fileHash", posts.get(position).file_hash);
+                i.putExtra("author", posts.get(position).author);
+                i.putExtra("date", posts.get(position).getDate());
                 startActivity(i);
             });
     }

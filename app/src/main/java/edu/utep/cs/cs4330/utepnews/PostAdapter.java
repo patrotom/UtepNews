@@ -45,10 +45,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.postHeadingView.setText(posts.get(position).heading);
         holder.postBodyView.setText(posts.get(position).description);
-
-        Date date = new Date((long)posts.get(position).added*1000);
-        DateFormat f = new SimpleDateFormat("MM/dd/yyyy");
-        holder.postDateView.setText(f.format(date));
+        holder.postDateView.setText(posts.get(position).getDate());
     }
 
     @Override
