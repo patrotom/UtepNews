@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +36,14 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         setupDatabase();
         setupRecyclerView();
+
+        ItemClickSupport.addTo(recyclerView)
+            .setOnItemClickListener((RecyclerView recyclerView, int position, View v) -> {
+                Intent i = new Intent(this, PostActivity.class);
+
+                i.putExtra("fileHash", posts.get(position).file_hash);
+                startActivity(i);
+            });
     }
 
     private void setupDatabase() {
