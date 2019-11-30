@@ -32,7 +32,7 @@ public class NoInternetActivity extends AppCompatActivity {
                 protected void onPostExecute(Pair<Context, Boolean> result) {
                     if (result.second.booleanValue()) {
                         startService(new Intent(result.first, ConnectionCheckService.class));
-                        startActivity(new Intent(result.first, LoginActivity.class));
+                        startActivity(new Intent(result.first, MainActivity.class));
                     }
                     else {
                         makeToast();
