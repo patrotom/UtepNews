@@ -13,4 +13,5 @@
     <string name="retry">Retry</string>
     <string name="remember_me">Remember me</string>
     <string name="remember_me_file_name">edu.utep.cs.cs4330.remember_me</string>
+    <string name="log_out">Log out</string>
 </resources>

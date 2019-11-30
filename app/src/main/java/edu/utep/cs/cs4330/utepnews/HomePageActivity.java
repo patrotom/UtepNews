@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
@@ -48,6 +52,21 @@ public class HomePageActivity extends AppCompatActivity {
             });
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_log_out:
+                logOut();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void setupDatabase() {
         posts = new ArrayList<>();
         db = FirebaseDatabase.getInstance().getReference("posts");
@@ -85,5 +104,16 @@ public class HomePageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerAdapter = new PostAdapter(posts);
         recyclerView.setAdapter(recyclerAdapter);
+    }
+
+    private void logOut() {
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.remember_me_file_name), Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("rememberMe", false);
+        editor.apply();
+
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
