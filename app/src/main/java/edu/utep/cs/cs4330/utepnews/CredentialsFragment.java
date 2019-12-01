@@ -33,7 +33,6 @@ public class CredentialsFragment extends Fragment {
     private EditText passwordEditText;
     private EditText passwordAgainEditText;
     private Button submitButton;
-    private TextView actionTextView;
     private CheckBox rememberMeCheckBox;
 
     private FirebaseAuth auth;
@@ -48,7 +47,6 @@ public class CredentialsFragment extends Fragment {
         passwordEditText = view.findViewById(R.id.passwordEditText);
         passwordAgainEditText = view.findViewById(R.id.passwordAgainEditText);
         submitButton = view.findViewById(R.id.submitButton);
-        actionTextView = view.findViewById(R.id.actionTextView);
         rememberMeCheckBox = view.findViewById(R.id.rememberMeCheckBox);
 
         auth = FirebaseAuth.getInstance();
@@ -61,20 +59,11 @@ public class CredentialsFragment extends Fragment {
             case LOGIN_LAYOUT:
                 passwordAgainEditText.setVisibility(View.GONE);
                 submitButton.setText(getString(R.string.login));
-                actionTextView.setText(getString(R.string.register));
                 submitButton.setOnClickListener(this::loginClicked);
-                actionTextView.setOnClickListener((View view) -> {
-                    Intent intent = new Intent(getActivity(), RegisterActivity.class);
-                    startActivity(intent);
-                });
                 break;
             case REGISTER_LAYOUT:
                 rememberMeCheckBox.setVisibility(View.GONE);
                 submitButton.setOnClickListener(this::registerClicked);
-                actionTextView.setOnClickListener((View view) -> {
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
-                });
                 break;
             default:
                 break;
