@@ -8,18 +8,4 @@
         android:title="@string/log_out"
         app:showAsAction="ifRoom"
     />
-    <item
-        android:id="@+id/action_about"
-        android:icon="@drawable/ic_info"
-        android:orderInCategory="200"
-        android:title="@string/about_app"
-        app:showAsAction="ifRoom"
-        />
-    <item
-        android:id="@+id/action_contact"
-        android:icon="@drawable/ic_mail"
-        android:orderInCategory="100"
-        android:title="@string/contact_app"
-        app:showAsAction="ifRoom"
-        />
 </menu>

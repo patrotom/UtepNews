@@ -33,8 +33,6 @@ public class CredentialsFragment extends Fragment {
     private EditText passwordEditText;
     private EditText passwordAgainEditText;
     private Button submitButton;
-    private TextView aboutTextView;
-    private TextView contactTextView;
     private TextView actionTextView;
     private CheckBox rememberMeCheckBox;
 
@@ -50,8 +48,6 @@ public class CredentialsFragment extends Fragment {
         passwordEditText = view.findViewById(R.id.passwordEditText);
         passwordAgainEditText = view.findViewById(R.id.passwordAgainEditText);
         submitButton = view.findViewById(R.id.submitButton);
-        aboutTextView = view.findViewById(R.id.aboutTextView);
-        contactTextView = view.findViewById(R.id.contactTextView);
         actionTextView = view.findViewById(R.id.actionTextView);
         rememberMeCheckBox = view.findViewById(R.id.rememberMeCheckBox);
 
