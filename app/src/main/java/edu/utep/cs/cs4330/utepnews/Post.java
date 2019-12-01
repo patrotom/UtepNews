@@ -2,6 +2,7 @@ package edu.utep.cs.cs4330.utepnews;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Post implements Comparable<Post> {
