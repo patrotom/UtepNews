@@ -1,11 +1,13 @@
 package edu.utep.cs.cs4330.utepnews;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -116,6 +118,24 @@ public class HomePageActivity extends AppCompatActivity {
     }
 
     private void logOut() {
+        DialogInterface.OnClickListener dialogClickListener =
+                (DialogInterface dialog, int which) -> {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    logOutYes();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Log out?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
+    }
+
+    private void logOutYes() {
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.remember_me_file_name), Context.MODE_PRIVATE);
 
