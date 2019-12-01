@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +35,7 @@ public class HomePageActivity extends AppCompatActivity {
     private List<Post> posts;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter recyclerAdapter;
+    private PostAdapter recyclerAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -48,6 +49,8 @@ public class HomePageActivity extends AppCompatActivity {
             .setOnItemClickListener((RecyclerView recyclerView, int position, View v) -> {
                 Intent i = new Intent(this, PostActivity.class);
 
+                posts = recyclerAdapter.getPosts();
+
                 i.putExtra("fileHash", posts.get(position).file_hash);
                 i.putExtra("author", posts.get(position).author);
                 i.putExtra("date", posts.get(position).getDate());
@@ -55,6 +58,7 @@ public class HomePageActivity extends AppCompatActivity {
             });
 
         setupSpinner();
+        setupSearch();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,6 +136,7 @@ public class HomePageActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                posts = recyclerAdapter.getPosts();
                 switch (i) {
                     case 0:
                         Collections.sort(posts);
@@ -147,6 +152,25 @@ public class HomePageActivity extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+    }
+
+    private void setupSearch() {
+        SearchView postSearchView = findViewById(R.id.postSearchView);
+
+        postSearchView.setQueryHint("Search...");
+
+        postSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                recyclerAdapter.getFilter().filter(query);
+                return false;
+            }
         });
     }
 }

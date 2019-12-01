@@ -4,21 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HomePageActivity" >
+    tools:context=".HomePageActivity">
+
+    <SearchView
+        android:id="@+id/postSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/sortByTextView"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/sort_by"
-            android:textAlignment="textEnd"
+            android:textAlignment="viewStart"
             android:textStyle="bold" />
 
         <Spinner
