@@ -3,21 +3,25 @@ package edu.utep.cs.cs4330.utepnews;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>
+        implements Filterable {
     private List<Post> posts;
+    private CustomFilter filter;
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView postHeadingView;
-        public TextView postBodyView;
-        public TextView postDateView;
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        private TextView postHeadingView;
+        private TextView postBodyView;
+        private TextView postDateView;
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             this.postHeadingView = view.findViewById(R.id.postHeadingView);
             this.postBodyView = view.findViewById(R.id.postBodyView);
@@ -25,8 +29,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         }
     }
 
-    public PostAdapter(List<Post> posts) {
+    PostAdapter(List<Post> posts) {
         this.posts = posts;
+    }
+
+    void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    List<Post> getPosts() {
+        return posts;
     }
 
     @Override
@@ -48,5 +60,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
         return posts.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        if(filter == null)
+            filter = new CustomFilter(posts,this);
+        return filter;
     }
 }
