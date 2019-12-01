@@ -13,6 +13,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,6 +53,8 @@ public class HomePageActivity extends AppCompatActivity {
                 i.putExtra("date", posts.get(position).getDate());
                 startActivity(i);
             });
+
+        setupSpinner();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,5 +120,33 @@ public class HomePageActivity extends AppCompatActivity {
         editor.apply();
 
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    private void setupSpinner() {
+        Spinner spinner = findViewById(R.id.sortingSpinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.sorting_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        Collections.sort(posts);
+                        Collections.reverse(posts);
+                        break;
+                    case 1:
+                        Collections.sort(posts);
+                        break;
+                    default:
+                        break;
+                }
+                recyclerAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
     }
 }

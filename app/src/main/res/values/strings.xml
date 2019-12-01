@@ -14,4 +14,9 @@
     <string name="remember_me">Remember me</string>
     <string name="remember_me_file_name">edu.utep.cs.cs4330.remember_me</string>
     <string name="log_out">Log out</string>
+    <string-array name="sorting_array">
+        <item>Date: New to Old</item>
+        <item>Date: Old to New</item>
+    </string-array>
+    <string name="sort_by">Sort by:</string>
 </resources>
