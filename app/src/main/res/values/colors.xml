@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="darkGrey">#9E9E9E</color>
+    <color name="utep_orange">#FF8200</color>
+    <color name="utep_blue">#041E42</color>
+    <color name="utep_blue_dark">#020d1c</color>
 </resources>
