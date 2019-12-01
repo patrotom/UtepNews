@@ -19,4 +19,6 @@
         <item>Date: Old to New</item>
     </string-array>
     <string name="sort_by">Sort by:</string>
+    <string name="about_app">About</string>
+    <string name="contact_app">Contact</string>
 </resources>
