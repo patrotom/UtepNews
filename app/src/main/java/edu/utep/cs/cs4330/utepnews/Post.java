@@ -2,9 +2,12 @@ package edu.utep.cs.cs4330.utepnews;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
 import java.util.Date;
 
+/**
+ * @author Tomas Patro
+ * @version 1.0
+ */
 public class Post implements Comparable<Post> {
     public int added;
     public String author, description, file_hash, heading;

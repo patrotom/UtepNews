@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * @author Tomas Patro
+ * @version 1.0
+ */
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>
         implements Filterable {
     private List<Post> posts;

@@ -5,6 +5,10 @@ import android.widget.Filter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Tomas Patro
+ * @version 1.0
+ */
 public class CustomFilter extends Filter {
     private PostAdapter adapter;
     private List<Post> filterList;

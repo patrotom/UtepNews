@@ -3,6 +3,10 @@ package edu.utep.cs.cs4330.utepnews;
 import android.app.IntentService;
 import android.content.Intent;
 
+/**
+ * @author Tomas Patro
+ * @version 1.0
+ */
 public class ConnectionCheckService extends IntentService {
     public ConnectionCheckService() {
         super("ConnectionCheckService");

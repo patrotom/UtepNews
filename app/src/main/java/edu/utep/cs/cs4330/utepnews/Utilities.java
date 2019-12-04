@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * @author Tomas Patro
+ * @version 1.0
+ */
 public class Utilities {
     public static boolean isInternetWorking(Context ctx) {
         if (isNetworkAvailable(ctx)) {

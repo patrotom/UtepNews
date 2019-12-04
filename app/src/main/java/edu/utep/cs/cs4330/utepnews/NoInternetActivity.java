@@ -10,6 +10,10 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.Toast;
 
+/**
+ * @author Tomas Patro
+ * @version 1.0
+ */
 public class NoInternetActivity extends AppCompatActivity {
     private boolean retryAlreadyClicked;
 
